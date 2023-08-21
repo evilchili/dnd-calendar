@@ -487,6 +487,7 @@ class Season(DateObject):
         year (int): The year in which this season falls.
     """
     names = ['Fox', 'Owl', 'Wolf', 'Eagle', 'Shark', 'Lion', 'Raven', 'Bear']
+    day_names = Day.names
     length_in_spans = 9
     length_in_days = length_in_spans * Span.length_in_days
     length_in_seconds = length_in_days * Day.length_in_seconds
@@ -522,6 +523,16 @@ class Season(DateObject):
         return "Season of the {}".format(self.name)
 
 
+class HuntDay(Day):
+
+    names = [
+        "Syf's Hunt",
+        "Mimir's Hunt",
+        "Woden's Hunt",
+        "Thorus's Hunt",
+        "Freya's Hunt"
+    ]
+
 class FestivalOfTheHunt(Season):
     """
     The 9th season, which only has 5 days, occurring at the end of each year.
@@ -538,13 +549,7 @@ class FestivalOfTheHunt(Season):
         name (str): The name of this special season
         year (Year): The year in which this festival falls
     """
-    day_names = [
-        "Syf's Hunt",
-        "Mimir's Hunt",
-        "Woden's Hunt",
-        "Thorus's Hunt",
-        "Freya's Hunt"
-    ]
+    day_names = HuntDay.names
     length_in_spans = 1
     length_in_days = 5
     length_in_seconds = length_in_days * Day.length_in_seconds
@@ -553,6 +558,8 @@ class FestivalOfTheHunt(Season):
         self.season_of_year = 9
         self.year = year
         self._days = []
+        for i in range(1, self.length_in_days + 1):
+            self._days.append(HuntDay(i, season=self))
 
     @property
     def name(self):

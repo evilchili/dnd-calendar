@@ -39,3 +39,7 @@ remove-unused-variables = true       # remove unused variables
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+telisar_calendar = "reckoning.calendar:main"
